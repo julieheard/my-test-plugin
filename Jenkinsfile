@@ -6,7 +6,8 @@ node {
     def mvn = tool 'default-maven';
     def scannerHome = tool 'sq-scanner';
     withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=testProject -Dsonar.projectName='testProject'"
+      //sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=testProject -Dsonar.projectName='testProject'"
+      sh "${mvn}/bin/mvn clean verify sonar:sonar"
     }
   }
 }
