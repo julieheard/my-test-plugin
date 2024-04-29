@@ -11,11 +11,3 @@ node {
     }
   }
 }
-
-stage('sonarqube') {
-
-    withSonarQubeEnv('cloudbees') {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-}
