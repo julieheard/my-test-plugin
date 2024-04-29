@@ -18,7 +18,7 @@ node {
     def mvn = tool 'Default Maven';
     withSonarQubeEnv('my-sonarqube-instance') {
       sh "${mvn}/bin/mvn clean install"
-      sh "${mvn}/bin/mvn verify sonar:sonar -Dsonar.projectKey=testProject -Dsonar.projectName='testProject'"
+      sh "${mvn}/bin/mvn verify sonar:sonar -Dsonar.projectKey=testProject -Dsonar.projectName='testProject' -Dsonar.login='my-test-token'"
     }
   }
 }
