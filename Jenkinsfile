@@ -16,7 +16,7 @@ node {
   }
   stage('SonarQube Analysis') {
     def mvn = tool 'Default Maven';
-    withSonarQubeEnv('sonarqube-scanner') {
+    withSonarQubeEnv('my-sonarqube-instance') {
       sh "${mvn}/bin/mvn clean install"
       sh "${mvn}/bin/mvn verify sonar:sonar -Dsonar.projectKey=testProject -Dsonar.projectName='testProject' -Dsonar.login=sqp_586844c9aa35880fa4e86089178aa0e4a5109823"
     }
