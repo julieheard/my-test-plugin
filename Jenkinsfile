@@ -1,7 +1,4 @@
 node {
-  stage('SCM') {
-    checkout scm
-  }
   stage('SonarQube Analysis') {
     def mvn = tool 'default-maven';
     def scannerHome = tool 'sq-scanner';
