@@ -11,20 +11,10 @@ node {
 }
 
 stage("Quality Gate"){
-     if (BRANCH_NAME == "develop") {
-       echo "In 'develop' branch, skip."
-     }
-     else { // this is a PR build, fail on threshold spill
-       def qualitygate = waitForQualityGate()
-       if (qualitygate.status != "OK") {
-         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-       } 
-     }
-  
-    timeout(time: 10, unit: 'SECONDS') {
+   // timeout(time: 10, unit: 'SECONDS') {
       def qg = waitForQualityGate() 
       if (qg.status != 'OK') {
         error "Pipeline aborted due to quality gate failure: ${qg.status}"
       }
-    }
+   // }
 }
