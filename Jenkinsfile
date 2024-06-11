@@ -9,9 +9,20 @@ node {
     }
   }
 }
+
 stage("Quality Gate"){
-    timeout(time: 10, unit: 'SECONDS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-      def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+     if (BRANCH_NAME == "develop") {
+       echo "In 'develop' branch, skip."
+     }
+     else { // this is a PR build, fail on threshold spill
+       def qualitygate = waitForQualityGate()
+       if (qualitygate.status != "OK") {
+         error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+       } 
+     }
+  
+    timeout(time: 10, unit: 'SECONDS') {
+      def qg = waitForQualityGate() 
       if (qg.status != 'OK') {
         error "Pipeline aborted due to quality gate failure: ${qg.status}"
       }
