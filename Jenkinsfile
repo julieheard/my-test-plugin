@@ -5,7 +5,7 @@ node {
   stage('SonarQube Analysis') {
     def mvn = tool 'default-maven';
     withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=cloudbees-replication-test-project -Dsonar.projectName='cloudbees-replication-test-project' -Dsonar.analysis.buildNumber=${env.BUILD_NUMBER} -Dsonar.analysis.buildName=${env.BUILD_NAME}"
+      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=cloudbees-replication-test-project -Dsonar.projectName='cloudbees-replication-test-project' -Dsonar.analysis.buildTag=${env.BUILD_TAG}"
     }
   }}
 
